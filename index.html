@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alibaba Clone Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#6366F1",
+                        secondary: "#EC4899",
+                    },
+                    borderRadius: {
+                        none: "0px",
+                        sm: "4px",
+                        DEFAULT: "4px",
+                        md: "8px",
+                        lg: "12px",
+                        xl: "16px",
+                        "2xl": "20px",
+                        "3xl": "24px",
+                        full: "9999px",
+                        button: "4px",
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        :where([class^=ri]) ::before {
+            content: "\f3c2";
+        }
+        .search-results {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background: #1f2937;
+            border: 1px solid #374151;
+            border-top: none;
+            border-radius: 8px;
+        }
+        .cart-icon:hover .cart-popup {
+            display: block;
+        }
+        .progress-bar-82 {
+            width: 82%;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <header class="fixed top-0 left-0 right-0 bg-gray-800 shadow-sm z-50">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+    <div class="flex items-center space-x-8">
+    <a href="/" class="text-2xl font-['Pacifico'] text-primary">logo</a>
+    <nav class="hidden md:flex space-x-6">
+    <a href="#" class="text-gray-300 hover:text-primary">Categories</a>
+    <a href="#" class="text-gray-300 hover:text-primary">Deals</a>
+    <a href="#" class="text-gray-300 hover:text-primary">What's New</a>
+    <a href="#" class="text-gray-300 hover:text-primary">Delivery</a>
+    </nav>
+    </div>
+    <div class="flex items-center space-x-6">
+    <div class="relative cart-icon">
+    <button class="w-10 h-10 flex items-center justify-center relative">
+    <i class="ri-shopping-cart-line text-xl"></i>
+    <span class="absolute -top-1 -right-1 bg-secondary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+    </button>
+    <div class="cart-popup p-4 bg-gray-800 border border-gray-700">
+    <div class="flex justify-between items-center mb-4">
+    <h3 class="font-semibold">Shopping Cart (3)</h3>
+    <button class="text-sm text-primary">View Cart</button>
+    </div>
+    <div class="space-y-4">
+    <div class="flex gap-3">
+    <img src="https://public.readdy.ai/ai/img_res/20e95af09f993a58c5622e5098a3d31d.jpg" class="w-20 h-20 object-cover rounded" alt="Wireless Earbuds">
+    <div>
+    <p class="text-sm font-medium">Wireless Earbuds Pro</p>
+    <p class="text-sm text-gray-500">1 × $129.99</p>
+    </div>
+    </div>
+    <div class="flex gap-3">
+    <img src="https://public.readdy.ai/ai/img_res/e5ad10948c91ad6aa889802a067106ad.jpg" class="w-20 h-20 object-cover rounded" alt="Smart Watch">
+    <div>
+    <p class="text-sm font-medium">Smart Watch Series 5</p>
+    <p class="text-sm text-gray-500">1 × $299.99</p>
+    </div>
+    </div>
+    </div>
+    <div class="mt-4 pt-4 border-t">
+    <div class="flex justify-between mb-4">
+    <span class="font-medium">Total:</span>
+    <span class="font-semibold">$429.98</span>
+    </div>
+    <button class="w-full bg-primary text-white py-2 rounded-button">Checkout</button>
+    </div>
+    </div>
+    </div>
+    <button class="hidden md:flex items-center space-x-2 text-gray-600 hover:text-primary">
+    <i class="ri-user-line text-xl"></i>
+    <span>Sign In</span>
+    </button>
+    </div>
+    </div>
+    </header>
+    <main class="mt-16 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="flex flex-col items-center mb-8">
+    <div class="w-full max-w-2xl relative">
+    <div class="flex items-center bg-gray-800 border border-gray-700 rounded-lg overflow-hidden">
+    <input type="text" placeholder="Search products, brands and categories..." class="flex-1 px-4 py-3 text-sm focus:outline-none search-input bg-gray-800 text-gray-100 placeholder-gray-400">
+    <button class="px-6 py-3 bg-primary text-white flex items-center justify-center !rounded-button" title="Search">
+    <i class="ri-search-line text-lg"></i>
+    </button>
+    </div>
+    <div class="search-results p-4">
+    <div class="mb-4">
+    <h3 class="text-sm font-medium text-gray-500 mb-2">Recent Searches</h3>
+    <div class="space-y-2">
+    <div class="flex items-center justify-between">
+    <span class="text-sm">wireless earbuds</span>
+    <button class="text-gray-400 hover:text-gray-600">
+    <i class="ri-close-line"></i>
+    </button>
+    </div>
+    <div class="flex items-center justify-between">
+    <span class="text-sm">smart watch</span>
+    <button class="text-gray-400 hover:text-gray-600">
+    <i class="ri-close-line"></i>
+    </button>
+    </div>
+    </div>
+    </div>
+    <div>
+    <h3 class="text-sm font-medium text-gray-500 mb-2">Popular Searches</h3>
+    <div class="grid grid-cols-2 gap-2">
+    <a href="#" class="text-sm text-primary hover:underline">iPhone 15 Pro</a>
+    <a href="#" class="text-sm text-primary hover:underline">MacBook Air</a>
+    <a href="#" class="text-sm text-primary hover:underline">AirPods Pro</a>
+    <a href="#" class="text-sm text-primary hover:underline">iPad Mini</a>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="mb-8 overflow-x-auto category-scroll">
+    <div class="flex space-x-6 min-w-max px-4">
+    <a href="#" class="flex flex-col items-center space-y-2">
+    <div class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center shadow-sm border border-gray-700">
+    <i class="ri-smartphone-line text-2xl text-primary"></i>
+    </div>
+    <span class="text-sm">Phones</span>
+    </a>
+    <a href="#" class="flex flex-col items-center space-y-2">
+    <div class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center shadow-sm border border-gray-700">
+    <i class="ri-computer-line text-2xl text-primary"></i>
+    </div>
+    <span class="text-sm">Computers</span>
+    </a>
+    <a href="#" class="flex flex-col items-center space-y-2">
+    <div class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center shadow-sm border border-gray-700">
+    <i class="ri-headphone-line text-2xl text-primary"></i>
+    </div>
+    <span class="text-sm">Audio</span>
+    </a>
+    <a href="#" class="flex flex-col items-center space-y-2">
+    <div class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center shadow-sm border border-gray-700">
+    <i class="ri-gamepad-line text-2xl text-primary"></i>
+    </div>
+    <span class="text-sm">Gaming</span>
+    </a>
+    <a href="#" class="flex flex-col items-center space-y-2">
+    <div class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center shadow-sm border border-gray-700">
+    <i class="ri-camera-line text-2xl text-primary"></i>
+    </div>
+    <span class="text-sm">Cameras</span>
+    </a>
+    <a href="#" class="flex flex-col items-center space-y-2">
+    <div class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center shadow-sm border border-gray-700">
+    <i class="ri-home-line text-2xl text-primary"></i>
+    </div>
+    <span class="text-sm">Smart Home</span>
+    </a>
+    </div>
+    </div>
+    <div class="relative mb-12 rounded-lg overflow-hidden">
+    <img src="https://public.readdy.ai/ai/img_res/f1a61c396f58704a061dc10fdf22ff4b.jpg" alt="Special Offers" class="w-full h-[400px] object-cover">
+    <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-center">
+    <div class="text-white p-12">
+    <h2 class="text-4xl font-bold mb-4">Spring Tech Sale</h2>
+    <p class="text-xl mb-6">Up to 40% off on selected items</p>
+    <button class="bg-white text-primary px-8 py-3 rounded-button font-medium hover:bg-gray-100">Shop Now</button>
+    </div>
+    </div>
+    </div>
+    <div class="mb-12">
+    <div class="flex justify-between items-center mb-6">
+    <h2 class="text-2xl font-semibold">Featured Categories</h2>
+    <a href="#" class="text-primary hover:underline">View All</a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <a href="#" class="group">
+    <div class="bg-white rounded-lg overflow-hidden shadow-sm">
+    <img src="https://public.readdy.ai/ai/img_res/b085f51a95e9ae940ea3bacf53066050.jpg" alt="Smartphones" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+    <div class="p-4">
+    <h3 class="font-medium mb-1">Smartphones</h3>
+    <p class="text-sm text-gray-500">Starting from $299</p>
+    </div>
+    </div>
+    </a>
+    <a href="#" class="group">
+    <div class="bg-white rounded-lg overflow-hidden shadow-sm">
+    <img src="https://public.readdy.ai/ai/img_res/8fc646fe72e4dae622983bca79c24342.jpg" alt="Laptops" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+    <div class="p-4">
+    <h3 class="font-medium mb-1">Laptops</h3>
+    <p class="text-sm text-gray-500">Starting from $699</p>
+    </div>
+    </div>
+    </a>
+    <a href="#" class="group">
+    <div class="bg-white rounded-lg overflow-hidden shadow-sm">
+    <img src="https://public.readdy.ai/ai/img_res/b346723f19220495f2a0b7919652f5a2.jpg" alt="Audio" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+    <div class="p-4">
+    <h3 class="font-medium mb-1">Audio</h3>
+    <p class="text-sm text-gray-500">Starting from $99</p>
+    </div>
+    </div>
+    </a>
+    <a href="#" class="group">
+    <div class="bg-white rounded-lg overflow-hidden shadow-sm">
+    <img src="https://public.readdy.ai/ai/img_res/276069e2fa34bb0c1eac524ea555a3d0.jpg" alt="Wearables" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+    <div class="p-4">
+    <h3 class="font-medium mb-1">Wearables</h3>
+    <p class="text-sm text-gray-500">Starting from $199</p>
+    </div>
+    </div>
+    </a>
+    </div>
+    </div>
+    <div class="mb-12">
+    <div class="flex justify-between items-center mb-6">
+    <h2 class="text-2xl font-semibold">Recommended For You</h2>
+    <a href="#" class="text-primary hover:underline">See All</a>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+    <div class="bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-700">
+    <img src="https://public.readdy.ai/ai/img_res/f7a152619c4d865a8404fd46f1d7049d.jpg" alt="Wireless Earbuds" class="w-full h-48 object-cover rounded-lg mb-4">
+    <h3 class="font-medium mb-2">Premium Wireless Earbuds</h3>
+    <div class="flex items-center mb-2">
+    <div class="flex text-yellow-400">
+    <i class="ri-star-fill"></i>
+    <i class="ri-star-fill"></i>
+    <i class="ri-star-fill"></i>
+    <i class="ri-star-fill"></i>
+    <i class="ri-star-half-fill"></i>
+    </div>
+    <span class="text-sm text-gray-500 ml-2">(128)</span>
+    </div>
+    <div class="flex items-center justify-between">
+    <div>
+    <span class="text-lg font-semibold">$129.99</span>
+    <span class="text-sm text-gray-400 line-through ml-2">$159.99</span>
+    </div>
+    <button class="w-10 h-10 flex items-center justify-center bg-primary text-white rounded-full hover:bg-primary/90" title="Add to Cart">
+    <i class="ri-shopping-cart-line"></i>
+    </button>
+    </div>
+    </div>
+    <div class="bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-700">
+    <img src="https://public.readdy.ai/ai/img_res/daa094d135570c7134ac77a2d7cc8216.jpg" alt="Smart Watch" class="w-full h-48 object-cover rounded-lg mb-4">
+    <h3 class="font-medium mb-2">Smart Watch Elite</h3>
+    <div class="flex items-center mb-2">
+    <div class="flex text-yellow-400">
+    <i class="ri-star-fill"></i>
+    <i class="ri-star-fill"></i>
+    <i class="ri-star-fill"></i>
+    <i class="ri-star-fill"></i>
+    <i class="ri-star-fill"></i>
+    </div>
+    <span class="text-sm text-gray-500 ml-2">(256)</span>
+    </div>
+    <div class="flex items-center justify-between">
+    <div>
+    <span class="text-lg font-semibold">$299.99</span>
+    <span class="text-sm text-gray-400 line-through ml-2">$349.99</span>
+    </div>
+    <button class="w-10 h-10 flex items-center justify-center bg-primary text-white rounded-full hover:bg-primary/90" title="Add to Cart">
+    <i class="ri-shopping-cart-line"></i>
+    </button>
+    </div>
+    </div>
+    <div class="bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-700">
+    <img src="https://public.readdy.ai/ai/img_res/e897e4417280cc22f70eec6ca7722d47.jpg" alt="Headphones" class="w-full h-48 object-cover rounded-lg mb-4">
+    <h3 class="font-medium mb-2">Pro Noise Cancelling Headphones</h3>
+    <div class="flex items-center mb-2">
+    <div class="flex text-yellow-400">
+    <i class="ri-star-fill"></i>
+    <i class="ri-star-fill"></i>
+    <i class="ri-star-fill"></i>
+    <i class="ri-star-fill"></i>
+    <i class="ri-star-line"></i>
+    </div>
+    <span class="text-sm text-gray-500 ml-2">(184)</span>
+    </div>
+    <div class="flex items-center justify-between">
+    <div>
+    <span class="text-lg font-semibold">$249.99</span>
+    <span class="text-sm text-gray-400 line-through ml-2">$299.99</span>
+    </div>
+    <button class="w-10 h-10 flex items-center justify-center bg-primary text-white rounded-full hover:bg-primary/90" title="Add to Cart">
+    <i class="ri-shopping-cart-line"></i>
+    </button>
+    </div>
+    </div>
+    <div class="bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-700">
+    <img src="https://public.readdy.ai/ai/img_res/8bee187a9fdf8278717572049bcf6473.jpg" alt="Tablet" class="w-full h-48 object-cover rounded-lg mb-4">
+    <h3 class="font-medium mb-2">Pro Tablet with Stylus</h3>
+    <div class="flex items-center mb-2">
+    <div class="flex text-yellow-400">
+    <i class="ri-star-fill"></i>
+    <i class="ri-star-fill"></i>
+    <i class="ri-star-fill"></i>
+    <i class="ri-star-fill"></i>
+    <i class="ri-star-half-fill"></i>
+    </div>
+    <span class="text-sm text-gray-500 ml-2">(142)</span>
+    </div>
+    <div class="flex items-center justify-between">
+    <div>
+    <span class="text-lg font-semibold">$599.99</span>
+    <span class="text-sm text-gray-400 line-through ml-2">$649.99</span>
+    </div>
+    <button class="w-10 h-10 flex items-center justify-center bg-primary text-white rounded-full hover:bg-primary/90" title="Add to Cart">
+    <i class="ri-shopping-cart-line"></i>
+    </button>
+    </div>
+    </div>
+    <div class="bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-700">
+    <img src="https://public.readdy.ai/ai/img_res/ec73ae8f1d56af2ce57f4a0b308ce17c.jpg" alt="Wireless Charger" class="w-full h-48 object-cover rounded-lg mb-4">
+    <h3 class="font-medium mb-2">Fast Wireless Charger</h3>
+    <div class="flex items-center mb-2">
+    <div class="flex text-yellow-400">
+    <i class="ri-star-fill"></i>
+    <i class="ri-star-fill"></i>
+    <i class="ri-star-fill"></i>
+    <i class="ri-star-fill"></i>
+    <i class="ri-star-line"></i>
+    </div>
+    <span class="text-sm text-gray-500 ml-2">(98)</span>
+    </div>
+    <div class="flex items-center justify-between">
+    <div>
+    <span class="text-lg font-semibold">$49.99</span>
+    <span class="text-sm text-gray-400 line-through ml-2">$59.99</span>
+    </div>
+    <button class="w-10 h-10 flex items-center justify-center bg-primary text-white rounded-full hover:bg-primary/90" title="Add to Cart">
+    <i class="ri-shopping-cart-line"></i>
+    </button>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="bg-gray-800 rounded-lg shadow-sm p-8 mb-12 border border-gray-700">
+    <div class="flex justify-between items-center mb-6">
+    <h2 class="text-2xl font-semibold">Flash Deals</h2>
+    <div class="flex items-center space-x-2">
+    <span class="text-gray-500">Ends in:</span>
+    <div class="bg-gray-100 px-3 py-1 rounded">
+    <span class="font-medium" id="countdown">23:59:59</span>
+    </div>
+    </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="relative">
+    <div class="absolute top-4 left-4 bg-red-500 text-white px-2 py-1 rounded text-sm">-40%</div>
+    <img src="https://public.readdy.ai/ai/img_res/8806efc7b361fcfc0c393c81548f58b5.jpg" alt="Gaming Headset" class="w-full h-48 object-cover rounded-lg mb-4">
+    <h3 class="font-medium mb-2">Pro Gaming Headset</h3>
+    <div class="flex items-center justify-between mb-2">
+    <div>
+    <span class="text-lg font-semibold">$89.99</span>
+    <span class="text-sm text-gray-400 line-through ml-2">$149.99</span>
+    </div>
+    <div class="text-sm text-gray-400">
+    Sold: 89/100
+    </div>
+    </div>
+    <div class="w-full bg-gray-700 rounded-full h-2">
+    <div class="bg-primary h-2 rounded-full progress-bar-89"></div>
+    </div>
+    </div>
+    <div class="relative">
+    <div class="absolute top-4 left-4 bg-red-500 text-white px-2 py-1 rounded text-sm">-35%</div>
+    <img src="https://public.readdy.ai/ai/img_res/12d9e7407b11ec51a945d9cc41180d23.jpg" alt="Portable Speaker" class="w-full h-48 object-cover rounded-lg mb-4">
+    <h3 class="font-medium mb-2">Waterproof Bluetooth Speaker</h3>
+    <div class="flex items-center justify-between mb-2">
+    <div>
+    <span class="text-lg font-semibold">$64.99</span>
+    <span class="text-sm text-gray-400 line-through ml-2">$99.99</span>
+    </div>
+    <div class="text-sm text-gray-400">
+    Sold: 76/100
+    </div>
+    </div>
+    <div class="w-full bg-gray-700 rounded-full h-2">
+    <div class="bg-primary h-2 rounded-full progress-bar-76"></div>
+    </div>
+    </div>
+    <div class="relative">
+    <div class="absolute top-4 left-4 bg-red-500 text-white px-2 py-1 rounded text-sm">-30%</div>
+    <img src="https://public.readdy.ai/ai/img_res/b8c8bec3570d7c1646943327f942e11d.jpg" alt="Power Bank" class="w-full h-48 object-cover rounded-lg mb-4">
+    <h3 class="font-medium mb-2">20000mAh Power Bank</h3>
+    <div class="flex items-center justify-between mb-2">
+    <div>
+    <span class="text-lg font-semibold">$34.99</span>
+    <span class="text-sm text-gray-400 line-through ml-2">$49.99</span>
+    </div>
+    <div class="text-sm text-gray-400">
+    Sold: 82/100
+    <div class="bg-primary h-2 rounded-full progress-bar-82"></div>
+    </div>
+    <div class="w-full bg-gray-700 rounded-full h-2">
+    <div class="bg-primary h-2 rounded-full progress-bar-82"></div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </main>
+    <footer class="bg-gray-800 border-t border-gray-700">
+    <div class="max-w-7xl mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <div>
+    <h3 class="text-lg font-semibold mb-4">Shop</h3>
+    <ul class="space-y-2">
+    <li><a href="#" class="text-gray-500 hover:text-primary">Deals</a></li>
+    <li><a href="#" class="text-gray-500 hover:text-primary">New Arrivals</a></li>
+    <li><a href="#" class="text-gray-500 hover:text-primary">Best Sellers</a></li>
+    <li><a href="#" class="text-gray-500 hover:text-primary">Gift Cards</a></li>
+    </ul>
+    </div>
+    <div>
+    <h3 class="text-lg font-semibold mb-4">Support</h3>
+    <ul class="space-y-2">
+    <li><a href="#" class="text-gray-500 hover:text-primary">Contact Us</a></li>
+    <li><a href="#" class="text-gray-500 hover:text-primary">Shipping Info</a></li>
+    <li><a href="#" class="text-gray-500 hover:text-primary">Returns</a></li>
+    <li><a href="#" class="text-gray-500 hover:text-primary">FAQ</a></li>
+    </ul>
+    </div>
+    <div>
+    <h3 class="text-lg font-semibold mb-4">About</h3>
+    <ul class="space-y-2">
+    <li><a href="#" class="text-gray-500 hover:text-primary">Our Story</a></li>
+    <li><a href="#" class="text-gray-500 hover:text-primary">Learn More</a></li>
+    <li><a href="#" class="text-gray-500 hover:text-primary">Careers</a></li>
+    <li><a href="#" class="text-gray-500 hover:text-primary">Press</a></li>
+    </ul>
+    </div>
+    <div>
+    <h3 class="text-lg font-semibold mb-4">Newsletter</h3>
+    <p class="text-gray-400 mb-4">Subscribe to get special offers, free giveaways, and updates.</p>
+    <form class="flex">
+    <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-2 border border-gray-700 rounded-l focus:outline-none focus:ring-1 focus:ring-primary bg-gray-800 text-gray-100 placeholder-gray-400">
+    <button type="submit" class="px-6 py-2 bg-primary text-white rounded-r hover:bg-primary/90">Subscribe</button>
+    </form>
+    </div>
+    </div>
+    <div class="border-t mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+    <p class="text-gray-500 text-sm">&copy; 2024 Online Shopping Platform. All rights reserved.</p>
+    <div class="flex space-x-6 mt-4 md:mt-0">
+    <a href="#" class="text-gray-500 hover:text-primary" title="Facebook">
+        <i class="ri-facebook-fill text-xl"></i>
+    </a>
+    <i class="ri-facebook-fill text-xl"></i>
+    </a>
+    <a href="#" class="text-gray-500 hover:text-primary" title="Twitter">
+    <i class="ri-twitter-fill text-xl"></i>
+    </a>
+    <a href="#" class="text-gray-500 hover:text-primary" title="Instagram">
+    <i class="ri-instagram-fill text-xl"></i>
+    </a>
+    <a href="#" class="text-gray-500 hover:text-primary" title="YouTube">
+    <i class="ri-youtube-fill text-xl"></i>
+    </a>
+    </div>
+    </div>
+    </div>
+    </footer>
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-primary/90 transition-opacity duration-300 opacity-0" title="Back to top">
+        <i class="ri-arrow-up-line text-xl"></i>
+    </button>
+    <script>
+    // Back to top button
+    const backToTopButton = document.getElementById("backToTop");
+    window.addEventListener("scroll", () => {
+      if (window.pageYOffset > 300) {
+        backToTopButton.style.opacity = "1";
+      } else {
+        backToTopButton.style.opacity = "0";
+      }
+    });
+    backToTopButton.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+    // Countdown timer
+    function updateCountdown() {
+      const countdownElement = document.getElementById("countdown");
+      let [hours, minutes, seconds] = countdownElement.textContent
+        .split(":")
+        .map(Number);
+      if (seconds > 0) {
+        seconds--;
+      } else if (minutes > 0) {
+        minutes--;
+        seconds = 59;
+      } else if (hours > 0) {
+        hours--;
+        minutes = 59;
+        seconds = 59;
+      }
+      countdownElement.textContent = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+    }
+    setInterval(updateCountdown, 1000);
+    </script>
+    
+</body>
+</html>
